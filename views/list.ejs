@@ -9,8 +9,18 @@
 </head>
 
 <body>
-    <h1>type of <%= typeOfDay %>
-            </h>
+
+
+    <% if (typeOfDay==="Saturday" || typeOfDay==="Sunday" ){ %>
+        <h1 style="color:purple">
+            <%= typeOfDay %> ToDo List
+        </h1>
+        <% } else { %>
+            <h1 style="color:blue">
+                <%= typeOfDay %> ToDo List
+            </h1>
+            <%} %>
+
 
 </body>
 
