@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-
+var items = [];
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
@@ -13,12 +13,14 @@ app.get("/", (req, res) => {
   };
   var day = today.toLocaleDateString("en-US", options);
 
-  res.render("list", { typeOfDay: day });
+  res.render("list", { typeOfDay: day, newListItem: Item });
 });
 app.post("/", function (req, res) {
-  let item = req.body.newItem;
-  console.log(item);
+  Item = req.body.newItem;
+  items.push(Item);
+  res.redirect("/");
 });
+
 app.listen(3000, () => {
   console.log("server is running");
 });
