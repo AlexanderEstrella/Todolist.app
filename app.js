@@ -13,10 +13,10 @@ app.get("/", (req, res) => {
   };
   var day = today.toLocaleDateString("en-US", options);
 
-  res.render("list", { typeOfDay: day, newListItem: Item });
+  res.render("list", { typeOfDay: day, newListItem: items });
 });
 app.post("/", function (req, res) {
-  Item = req.body.newItem;
+  var Item = req.body.newItem;
   items.push(Item);
   res.redirect("/");
 });
