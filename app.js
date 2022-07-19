@@ -13,11 +13,11 @@ app.get("/", (req, res) => {
   };
   var day = today.toLocaleDateString("en-US", options);
 
-  res.render("list", { typeOfDay: day, newListItem: items });
+  res.render("list", { typeOfDay: day, items: items });
 });
 app.post("/", function (req, res) {
-  var Item = req.body.newItem;
-  items.push(Item);
+  var item = req.body.newItem;
+  items.push(item);
   res.redirect("/");
 });
 
