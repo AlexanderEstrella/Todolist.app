@@ -37,3 +37,7 @@ app.listen(3000, () => {
 app.get("/work", function (req, res) {
   res.render("list", { ListTitle: "Work list", newListItems: workItems });
 });
+
+app.get("/about", function (req, res) {
+  res.render("about");
+});
