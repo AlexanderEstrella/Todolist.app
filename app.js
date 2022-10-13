@@ -25,7 +25,7 @@ app.post("/", function (req, res) {
   }
 });
 app.use("/css", express.static(path.resolve(__dirname, "Public/css")));
-app.listen(3000, () => {
+app.listen(5000, () => {
   console.log("server is running");
 });
 app.get("/work", function (req, res) {
