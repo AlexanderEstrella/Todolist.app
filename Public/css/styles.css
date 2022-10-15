@@ -1,5 +1,5 @@
 html {
-  background-color: #E4E9FD;
+  background-color: #3FEEE6;
   background-image: -webkit-linear-gradient(65deg, #7337db 50%, #cfd8fc 50%);
   min-height: 1000px;
   font-family: 'helvetica neue';
@@ -27,7 +27,7 @@ h1 {
   min-height: 70px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #F1F1F1;
+  border-bottom: 1px solid #55BCC9;
 }
 
 .item:last-child {
@@ -61,7 +61,7 @@ button {
   width: 50px;
   border-radius: 50%;
   border-color: transparent;
-  background-color: #A683E3;
+  background-color: #3FEEE6;
   color: #fff;
   font-size: 30px;
   padding-bottom: 6px;
