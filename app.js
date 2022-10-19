@@ -2,15 +2,11 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
-const { stringify } = require("querystring");
 const date = require("./date");
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("Public"));
-
-const items = [];
-const workItems = [];
 
 const itemSchema = new mongoose.Schema({
   name: String,
@@ -55,15 +51,33 @@ app.get("/", (req, res) => {
     }
   });
 });
-
+// checking if a list already exist and creating more lists
 app.get("/:any", (req, res) => {
-  const ovar = req.params.any;
-  const list = new List({
-    name: ovar,
-    items: defaultItems,
-  });
-  list.save();
+  if (req.params.any != "favicon.ico") {
+    const CustomizedItem = req.params.any;
+    //  finds new collection
+    List.findOne({ name: CustomizedItem }, function (err, foundlist) {
+      if (!err) {
+        // creates new list if a collection is not found
+        if (!foundlist) {
+          const list = new List({
+            name: CustomizedItem,
+            items: defaultItems,
+          });
+          list.save();
+          res.redirect("/" + CustomizedItem);
+        } else {
+          // renders items to may page
+          res.render("list", {
+            ListTitle: foundlist.name,
+            newListItems: foundlist.items,
+          });
+        }
+      }
+    });
+  }
 });
+
 // adding new items to database/home route
 app.post("/", function (req, res) {
   const itemName = req.body.newItem;
