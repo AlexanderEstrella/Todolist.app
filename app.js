@@ -54,7 +54,9 @@ app.get("/", (req, res) => {
 // checking if a list already exist and creating more lists
 app.get("/:any", (req, res) => {
   if (req.params.any != "favicon.ico") {
-    const CustomizedItem = req.params.any;
+    const Customized = req.params.any;
+    const CustomizedItem = Customized[0].toUpperCase() + Customized.slice(1);
+
     //  finds new collection
     List.findOne({ name: CustomizedItem }, function (err, foundlist) {
       if (!err) {
@@ -81,23 +83,45 @@ app.get("/:any", (req, res) => {
 // adding new items to database/home route
 app.post("/", function (req, res) {
   const itemName = req.body.newItem;
+  const newlist = req.body.list;
   const Item = new item({
     name: itemName,
   });
-  Item.save();
-  res.redirect("/");
+  if (newlist === "today") {
+    Item.save();
+    res.redirect("/");
+  } else {
+    List.findOne({ name: newlist }, function (err, foundName) {
+      foundName.items.push(Item);
+      foundName.save();
+      res.redirect("/" + newlist);
+    });
+  }
 });
 // deleting items from out database
 app.post("/delete", (req, res) => {
   const checkedItemid = req.body.checkeditem;
-  item.findOneAndDelete({ _id: checkedItemid }, function (err) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("item was deleted");
-      res.redirect("/");
-    }
-  });
+  const listNames = req.body.listNames;
+  if (listNames === "today") {
+    item.findOneAndDelete({ _id: checkedItemid }, function (err) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("item was deleted");
+        res.redirect("/");
+      }
+    });
+  } else {
+    List.findOneAndUpdate(
+      { name: listNames },
+      { $pull: { items: { _id: checkedItemid } } },
+      function (err, foundDel) {
+        if (!err) {
+          res.redirect("/" + listNames);
+        }
+      }
+    );
+  }
 });
 
 app.use("/css", express.static(path.resolve(__dirname, "Public/css")));
