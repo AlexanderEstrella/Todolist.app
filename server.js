@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 dotenv.config({ path: "./config.env" });
 
 // connecting mongodb using mongoose- ID in encrypted file
-const DB = process.env.DATABASE;
+const DB = process.env.DATABASE_URL;
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
