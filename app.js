@@ -19,10 +19,10 @@ const item1 = new item({
 });
 
 const item2 = new item({
-  name: "hit the + button to aff a new item",
+  name: "Hit the + button to add a new item",
 });
 const item3 = new item({
-  name: "<---hit this to delete an item",
+  name: "<---Hit this to delete an item",
 });
 const defaultItems = [item1, item2, item3];
 
