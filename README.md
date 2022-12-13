@@ -14,7 +14,7 @@
 * CSS
 
 
-## to run:
+## To run:
 
 In the project directory, you can run:
 
