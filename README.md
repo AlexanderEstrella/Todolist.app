@@ -9,3 +9,17 @@ to set up properly for the following instructions.
 
 Runs the app in the development mode.\
 Open [http://localhost:3000] to view it in your browser.
+
+# Description : 
+
+* Daily To-do list where users can create and delete task. 
+
+# Technologies used: 
+* Javascript
+* Mongoose
+* Mongodb
+* EJS
+* HTML
+* Express
+* CSS
+
